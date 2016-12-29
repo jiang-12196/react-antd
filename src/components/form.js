@@ -1,13 +1,13 @@
 import React from 'react'
 import { Form, Input, Select, Checkbox, DatePicker, Col, Radio, Button, Modal, message } from 'antd'
 
-const FormItem = Form.Item
-const Option = Select.Option
-const RadioGroup = Radio.Group
+const FormItem = Form.Item;
+const Option = Select.Option;
+const RadioGroup = Radio.Group;
 
 class myForm extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             visible: false
         }
@@ -133,6 +133,6 @@ class myForm extends React.Component {
     }
 }
 
-myForm = Form.create()(myForm)
+myForm = Form.create()(myForm);
 
 export default myForm
