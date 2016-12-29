@@ -44,11 +44,11 @@ class myForm extends React.Component {
         const formItemLayout = {
             labelCol: { span: 3 },
             wrapperCol: { span: 6 }
-        }
+        };
 
         const success = function () {
             message.success('操作成功!');
-        }
+        };
 
         return (
             <Form horizontal onSubmit={this.handleSubmit}>

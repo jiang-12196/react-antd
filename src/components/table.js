@@ -1,9 +1,26 @@
 import React from 'react'
 import {Table, Icon} from 'antd'
+import $ from 'jquery';
+import Mock from 'mockjs';
+
+
+Mock.mock('http://ajax.data.com',{
+    'items|31':[
+        {
+            'key|+1': 1,
+            'name':'@cname',
+            'email':'@email',
+            'address':'@county(true)',
+            'age|15-30': 30,
+            'remark': '@url()',
+            'operate': '暂无'
+        }
+    ]
+});
 
 export default class myTable extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             tDate: [],
             selectedRowKeys: []
@@ -11,29 +28,26 @@ export default class myTable extends React.Component {
     }
 
     componentDidMount() {
-        const data = []
-
-        for (let i = 0; i < 46; i++) {
-            data.push({
-                key: i,
-                name: `Mr劳卜${i}`,
-                age: 18,
-                address: `西湖区湖底公园${i}号`,
-                remark: 'http://www.cnblogs.com/luozhihao/',
-                operate: '暂无'
-            })
-        }
-
-        this.setState({
-            tDate: data
-        })
+        const data = [];
+        let url = 'http://ajax.data.com';
+        // ajax回调方法
+        $.ajax({
+            url: url,
+            dataType:'json',
+            success:function (data) {
+                this.setState({
+                    tDate: data['items']
+                })
+            }.bind(this)
+        });
     }
+
 
     // checkbox状态
     onSelectChange = (selectedRowKeys) => {
         console.log('selectedRowKeys changed: ', selectedRowKeys)
         this.setState({ selectedRowKeys })
-    }
+    };
 
     render() {
         const columns = [{
@@ -59,14 +73,14 @@ export default class myTable extends React.Component {
             title: '操作',
             width: '20%',
             dataIndex: 'operate'
-        }]
+        }];
 
         const { selectedRowKeys } = this.state
 
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange
-        }
+        };
 
         const pagination = {
             total: this.state.tDate.length,
@@ -77,7 +91,7 @@ export default class myTable extends React.Component {
             onChange(current) {
                 console.log('Current: ', current)
             }
-        }
+        };
 
         return (
             <Table rowSelection={rowSelection} columns={columns} dataSource={this.state.tDate} bordered pagination={pagination} />
