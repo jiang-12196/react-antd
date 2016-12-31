@@ -2,7 +2,7 @@
  * 
  * @authors luozh@snail.com
  * @date    2016-03-21 16:42:35
- * @description 主入口模块
+ * @description 主入口模块jiang
  */
 
 import React from 'react'
